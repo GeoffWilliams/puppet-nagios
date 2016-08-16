@@ -80,7 +80,6 @@ class nagios(
     group   => 'root',
     mode    => '0644',
     content => template("${module_name}/nagios.conf.erb"),
-    require => Package['nagios'],
   }
 
   service { 'nagios':
