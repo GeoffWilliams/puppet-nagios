@@ -43,6 +43,7 @@ class nagios(
 ) inherits ::nagios::params {
   $service = $nagios::params::service
   $packages = $nagios::params::packages
+  $nagios_conf_dir = $nagios::params::nagios_conf_dir
 
   include epel
   require ::apache
@@ -53,7 +54,7 @@ class nagios(
     require => Class['epel'],
   }
 
-  file { '/etc/nagios/conf.d':
+  file { "${nagios_conf_dir}/conf.d":
     ensure  => directory,
     owner   => 'nagios',
     group   => 'nagios',
