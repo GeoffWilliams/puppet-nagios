@@ -85,6 +85,7 @@ class nagios(
     group   => 'root',
     mode    => '0644',
     content => template("${module_name}/nagios_${osfamily}.conf.erb"),
+    notify  => Service['httpd']
   }
 
   service { $service:
