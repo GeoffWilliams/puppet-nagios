@@ -47,7 +47,6 @@ class nagios(
   include epel
   require ::apache
   require ::apache::mod::php
-  require ::apache::mod::prefork
 
   package { $packages:
     ensure  => present,
