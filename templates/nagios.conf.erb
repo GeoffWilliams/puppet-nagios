@@ -1,0 +1,21 @@
+ScriptAlias /nagios/cgi-bin/ "/usr/lib64/nagios/cgi-bin/"
+
+<Directory "/usr/lib64/nagios/cgi-bin/">
+   Options ExecCGI
+   AllowOverride None
+   Order allow,deny
+   Allow from all
+   AuthName "Nagios Access"
+   AuthType Basic
+   AuthUserFile <%= @htpasswd %>
+   Require valid-user
+</Directory>
+
+Alias <%= @realm %> "/usr/share/nagios/html"
+
+<Directory "/usr/share/nagios/html">
+   Options None
+   AllowOverride None
+   Order allow,deny
+   Allow from all
+</Directory>

@@ -1,0 +1,17 @@
+{
+  "name": "geoffwilliams/nagios",
+  "version": "0.1.0",
+  "author": "geoffwilliams",
+  "summary": "Nagios Server installation",
+  "license": "Apache-2.0",
+  "source": "https://github.com/GeoffWilliams/puppet-nagios",
+  "project_page": "https://github.com/GeoffWilliams/puppet-nagios",
+  "issues_url": "https://github.com/GeoffWilliams/puppet-nagios/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
+    {"name":"stahnma-epel","version_requirement":">= 1.0.0"},
+    {"name":"puppetlabs-apache","version_requirements":">= 1.0.0"},
+  ],
+  "data_provider": null
+}
+
