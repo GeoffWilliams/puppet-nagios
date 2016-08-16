@@ -41,12 +41,15 @@ class nagios(
     $password         = "changeme",
     $realm            = "/nagios",
 ) inherits ::nagios::params {
+  $service = $nagios::params::service
+  $packages = $nagios::params::packages
 
   include epel
   require ::apache
   require ::apache::mod::php
+  require ::apache::mod::prefork
 
-  package { $nagios::params::packages:
+  package { $packages:
     ensure  => present,
     require => Class['epel'],
   }
@@ -56,7 +59,7 @@ class nagios(
     owner   => 'nagios',
     group   => 'nagios',
     mode    => '0755',
-    require => Package[$nagios::params::packages],
+    require => Package[$packages],
   }
 
   httpauth { 'nagios':
@@ -82,7 +85,7 @@ class nagios(
     content => template("${module_name}/nagios.conf.erb"),
   }
 
-  service { 'nagios':
+  service { $service:
     ensure    => running,
     enable    => true,
     subscribe => File["${apache_conf_dir}/nagios.conf"],
