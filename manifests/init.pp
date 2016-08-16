@@ -40,7 +40,7 @@ class nagios(
     $htpasswd         = $nagios::params::htpasswd,
     $password         = "changeme",
     $realm            = "/nagios",
-) inherits nagios::params {
+) inherits ::nagios::params {
 
   include epel
   require ::apache
@@ -56,7 +56,7 @@ class nagios(
     owner   => 'nagios',
     group   => 'nagios',
     mode    => '0755',
-    require => Package['nagios'],
+    require => Package[$nagios::params::packages],
   }
 
   httpauth { 'nagios':
