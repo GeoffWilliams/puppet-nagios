@@ -45,6 +45,7 @@ class nagios(
   $packages = $nagios::params::packages
   $nagios_conf_dir = $nagios::params::nagios_conf_dir
   $apache_group = $nagios::params::apache_group
+  $apache_conf = "${apache_conf_dir}/${service}.conf"
 
   include epel
   require ::apache
@@ -78,7 +79,7 @@ class nagios(
     mode   => '0640',
   }
 
-  file { "${apache_conf_dir}/${service}.conf":
+  file { $apache_conf:
     ensure  => file,
     owner   => 'root',
     group   => 'root',
@@ -89,7 +90,7 @@ class nagios(
   service { $service:
     ensure    => running,
     enable    => true,
-    subscribe => File["${apache_conf_dir}/nagios.conf"],
+    subscribe => File[$apache_conf],
   }
 
   if $collect {
