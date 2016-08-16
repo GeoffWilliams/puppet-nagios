@@ -56,6 +56,13 @@ class nagios(
     ensure    => present,
   }
 
+  file { $htpasswd:
+    ensure => file,
+    owner  => 'root',
+    group  => 'apache',
+    mode   => '0640',
+  }
+
   file { "${apache_conf_dir}/nagios.conf":
     ensure  => file,
     owner   => 'root',
