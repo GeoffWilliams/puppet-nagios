@@ -1,13 +1,13 @@
 class nagios::params {
   case $osfamily {
-    "RedHat": {
-      $apache_conf_dir = "/etc/httpd/conf.d"
+    'RedHat': {
+      $apache_conf_dir = '/etc/httpd/conf.d'
       $service = 'nagios'
       $packages = [$service,'nagios-plugins','nagios-plugins-all']
       $apache_group = "apache"
     }
-    "Debian": {
-      $apache_conf_dir = "/etc/apache2/conf-available/
+    'Debian': {
+      $apache_conf_dir = '/etc/apache2/conf-available/'
       $service = 'nagios3'
       $packages = [$service, 'monitoring-plugins']
       $apache_group = "www-data"
