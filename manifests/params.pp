@@ -7,7 +7,7 @@ class nagios::params {
       $apache_group = "apache"
     }
     "Debian": {
-      $apache_conf_dir = "/etc/apache2/conf.d"
+      $apache_conf_dir = "/etc/apache2/conf-available/
       $service = 'nagios3'
       $packages = [$service, 'monitoring-plugins']
       $apache_group = "www-data"
