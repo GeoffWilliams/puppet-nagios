@@ -8,19 +8,30 @@
 #
 # Document parameters here.
 #
-# * `sample parameter`
-# Explanation of what this parameter affects and what it defaults to.
-# e.g. "Specify one or more upstream ntp servers as an array."
-#
+# * `collect`
+# True if should collect and realize all nagios resources and tagged 
+# configuration files
+# * `monitor_tag`
+# Plaintext tag for nagios configuration files we should collect
+# * `apache_conf_dir`
+# Directory to write apache configuration files to
+# * `htpasswd`
+# Full path to .htpasswd file
+# * `password`
+# Password for the nagios user
+# * `realm`
+# Directory to manage passwords for (`/nagios`)
+# 
 # Authors
 # -------
 #
-# Author Name <author@domain.com>
+# Brett Gray
+# Geoff Williams
 #
 # Copyright
 # ---------
 #
-# Copyright 2016 Your name here, unless otherwise noted.
+# Copyright 2016 Puppet, Inc.
 #
 class nagios(
     $collect          = true,
