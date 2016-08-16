@@ -7,7 +7,9 @@ class nagios::params {
       $apache_group = "apache"
     }
     'Debian': {
-      $apache_conf_dir = '/etc/apache2/conf-available/'
+      # https://tickets.puppetlabs.com/browse/MODULES-3116      
+      # $apache_conf_dir = '/etc/apache2/conf-available/'
+      $apache_conf_dir = '/etc/apache2/conf.d'
       $service = 'nagios3'
       $packages = [$service, 'monitoring-plugins']
       $apache_group = "www-data"
