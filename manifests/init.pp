@@ -44,6 +44,7 @@ class nagios(
   $service = $nagios::params::service
   $packages = $nagios::params::packages
   $nagios_conf_dir = $nagios::params::nagios_conf_dir
+  $apache_group = $nagios::params::apache_group
 
   include epel
   require ::apache
@@ -73,7 +74,7 @@ class nagios(
   file { $htpasswd:
     ensure => file,
     owner  => 'root',
-    group  => 'apache',
+    group  => $apache_group,
     mode   => '0640',
   }
 
