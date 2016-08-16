@@ -78,12 +78,12 @@ class nagios(
     mode   => '0640',
   }
 
-  file { "${apache_conf_dir}/nagios.conf":
+  file { "${apache_conf_dir}/${service}.conf":
     ensure  => file,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template("${module_name}/nagios.conf.erb"),
+    content => template("${module_name}/nagios_${osfamily}.conf.erb"),
   }
 
   service { $service:
