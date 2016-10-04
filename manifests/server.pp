@@ -34,26 +34,23 @@
 # Copyright 2016 Puppet, Inc.
 #
 class nagios::server(
-    $collect          = $nagios::collect,
-    $monitor_tag      = $nagios::monitor_tag,
-    $apache_conf_dir  = $nagios::apache_conf_dir,
-    $htpasswd         = $nagios::htpasswd,
-    $password         = $nagios::password,
-    $realm            = $nagios::realm,
-    $service          = $nagios::service,
+    $collect          = true,
+    $monitor_tag      = "__MONITOR__",
+    $apache_conf_dir  = $nagios::params::apache_conf_dir,
+    $htpasswd         = $nagios::params::htpasswd,
+    $password         = "changeme",
+    $realm            = "/nagios",
+    $service          = $nagios::params::service,
+
 ) inherits nagios {
 
-  if ! defined(Class['nagios']) {
-    fail('You must include the nagios base class before using any apache defined resources')
-  }
-
   include nagios::params
-  $packages = $nagios::params::packages
-  $nagios_conf_dir = $nagios::params::nagios_conf_dir
-  $apache_group = $nagios::params::apache_group
-  $apache_conf = "${apache_conf_dir}/${service}.conf"
-  $nagios_cfg_file = $nagios::params::nagios_cfg_file
-  $nagios_group = $nagios::params::nagios_group
+  $packages         = $nagios::params::packages
+  $nagios_conf_dir  = $nagios::params::nagios_conf_dir
+  $apache_group     = $nagios::params::apache_group
+  $apache_conf      = "${apache_conf_dir}/${service}.conf"
+  $nagios_cfg_file  = $nagios::params::nagios_cfg_file
+  $nagios_group     = $nagios::params::nagios_group
 
   include epel
   require ::apache
