@@ -43,6 +43,9 @@ class nagios::server(
     $service          = $nagios::service,
 
 ) inherits nagios::params {
+  if ! defined(Class['nagios']) {
+    fail('You must include the nagios base class before using the nagios::server class')
+  }
 
   $packages         = $nagios::params::packages
   $nagios_conf_dir  = $nagios::params::nagios_conf_dir
