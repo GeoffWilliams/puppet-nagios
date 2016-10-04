@@ -43,6 +43,7 @@ class nagios::server(
     $service          = $nagios::service,
     $port             = $nagios::params::port,
     $enable_firewall  = true,
+    $purge            = true,
 ) inherits nagios::params {
   if ! defined(Class['nagios']) {
     fail('You must include the nagios base class before using the nagios::server class')
@@ -58,6 +59,15 @@ class nagios::server(
   include epel
   require ::apache
   require ::apache::mod::php
+
+  if $purge {
+    resources{ 'nagios_service': 
+      purge => true 
+    }
+    resources{ 'nagios_host': 
+      purge => true 
+    }
+  }
 
   package { $packages:
     ensure  => present,
