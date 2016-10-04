@@ -108,14 +108,14 @@ class nagios(
     file_line { "puppet_nagios_host":
       path   => $nagios_cfg_file,
       ensure => present,
-      line   => 'cfg_file="/etc/nagios/nagios_host.cfg"',
+      line   => 'cfg_file=/etc/nagios/nagios_host.cfg',
       notify => Service[$service],
     }
 
     file_line { "puppet_nagios_service":
       path   => $nagios_cfg_file,
       ensure => present,
-      line   => 'cfg_file="/etc/nagios/nagios_service.cfg"',
+      line   => 'cfg_file=/etc/nagios/nagios_service.cfg',
       notify => Service[$service],
     }
 
