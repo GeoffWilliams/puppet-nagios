@@ -64,7 +64,7 @@ class nagios(
     require => Package[$packages],
   }
 
-  httpauth { 'nagios':
+  httpauth { 'nagiosadmin':
     file      => $htpasswd,
     password  => $password,
     realm     => $realm,
