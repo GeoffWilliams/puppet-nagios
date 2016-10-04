@@ -23,4 +23,5 @@ class nagios::params {
   $nagios_conf_dir = "/etc/${service}"
   $htpasswd = "${nagios_conf_dir}/nagios.htpasswd"
   $nagios_cfg_file = "${nagios_conf_dir}/nagios.cfg"
+  $port = 80
 }

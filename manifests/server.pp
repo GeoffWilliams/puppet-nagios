@@ -41,7 +41,8 @@ class nagios::server(
     $password         = "changeme",
     $realm            = "/nagios",
     $service          = $nagios::service,
-
+    $port             = $nagios::params::port,
+    $enable_firewall  = true,
 ) inherits nagios::params {
   if ! defined(Class['nagios']) {
     fail('You must include the nagios base class before using the nagios::server class')
@@ -134,4 +135,13 @@ class nagios::server(
       notify => Service[$service],
     }
   }
+
+  if $enable_firewall and !defined(Firewall["100 ${::fqdn} HTTP ${port}"]) {
+    firewall { "100 ${::fqdn} HTTP ${port}":
+      dport   => $port,
+      proto   => 'tcp',
+      action  => 'accept',
+    }
+  }
+
 }
