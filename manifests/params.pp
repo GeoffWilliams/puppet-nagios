@@ -5,6 +5,7 @@ class nagios::params {
       $service = 'nagios'
       $packages = [$service,'nagios-plugins','nagios-plugins-all']
       $apache_group = "apache"
+      $nagios_group = 'nagios'
     }
     'Debian': {
       # https://tickets.puppetlabs.com/browse/MODULES-3116      
@@ -13,6 +14,7 @@ class nagios::params {
       $service = 'nagios3'
       $packages = [$service, 'monitoring-plugins']
       $apache_group = "www-data"
+      $nagios_group = 'nagios'
     }
     default: {
       notify { "module ${module_name} doesn't support ${osfamily} yet":}

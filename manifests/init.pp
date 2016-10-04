@@ -47,6 +47,7 @@ class nagios(
   $apache_group = $nagios::params::apache_group
   $apache_conf = "${apache_conf_dir}/${service}.conf"
   $nagios_cfg_file = $nagios::params::nagios_cfg_file
+  $nagios_group = $nagios::params::nagios_group
 
   include epel
   require ::apache
@@ -108,16 +109,23 @@ class nagios(
     file_line { "puppet_nagios_host":
       path   => $nagios_cfg_file,
       ensure => present,
-      line   => 'cfg_file=/etc/nagios/nagios_host.cfg',
+      line   => 'cfg_file=nagios_host.cfg',
       notify => Service[$service],
     }
 
     file_line { "puppet_nagios_service":
       path   => $nagios_cfg_file,
       ensure => present,
-      line   => 'cfg_file=/etc/nagios/nagios_service.cfg',
+      line   => 'cfg_file=nagios_service.cfg',
       notify => Service[$service],
     }
 
+    # fix permissions on puppet-generated cfg files
+    file { ['/etc/nagios/nagios_host.cfg', '/etc/nagios/nagios_service.cfg']:
+      ensure => file,
+      owner  => 'root',
+      group  => $nagios_group,
+      mode   => '0640',
+    }
   }
 }
