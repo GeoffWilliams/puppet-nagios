@@ -40,7 +40,7 @@ class nagios(
     $htpasswd         = $nagios::params::htpasswd,
     $password         = "changeme",
     $realm            = "/nagios",
-    $service          = $nagios::params::service
+    $service          = $nagios::params::service,
 ) inherits ::nagios::params {
   $packages = $nagios::params::packages
   $nagios_conf_dir = $nagios::params::nagios_conf_dir
