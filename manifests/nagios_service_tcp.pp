@@ -16,7 +16,7 @@ define nagios::nagios_service_tcp(
     use                 => 'generic-service',
     host_name           => $::fqdn,
     service_description => "${::fqdn}_tcp_${site_name}",
-    check_command       => "check_tcp!${site_name} -H ${_local_ip} -p ${port}",
+    check_command       => "check_tcp!${port}",
     notify              => Service[$nagios::service],
   }
 
