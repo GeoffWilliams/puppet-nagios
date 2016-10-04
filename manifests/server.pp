@@ -42,9 +42,8 @@ class nagios::server(
     $realm            = "/nagios",
     $service          = $nagios::params::service,
 
-) inherits nagios {
+) inherits nagios::params {
 
-  include nagios::params
   $packages         = $nagios::params::packages
   $nagios_conf_dir  = $nagios::params::nagios_conf_dir
   $apache_group     = $nagios::params::apache_group
