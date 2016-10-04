@@ -3,6 +3,7 @@ define nagios::nagios_service_http(
     $site_name      = $title,
     $port           = 80,
     $url            = '',
+    $service        = $nagios::service,
 ) {
 
   if $local_ip {

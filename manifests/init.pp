@@ -11,6 +11,9 @@
 # * `local_ip`
 # IP address of the server being monitored
 #
+# * `service`
+# Name of the nagios service to restart
+#
 # Authors
 # -------
 #
@@ -23,7 +26,8 @@
 # Copyright 2016 Puppet, Inc.
 #
 class nagios(
-    $local_ip         = undef,
+    $local_ip = undef,
+    $service  = $nagios::params::service,
 ) {
 
 }
