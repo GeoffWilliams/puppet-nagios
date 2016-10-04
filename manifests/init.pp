@@ -28,6 +28,6 @@
 class nagios(
     $local_ip = undef,
     $service  = $nagios::params::service,
-) {
+) inherits nagios::params {
 
 }
