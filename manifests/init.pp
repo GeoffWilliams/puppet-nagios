@@ -46,6 +46,7 @@ class nagios(
   $nagios_conf_dir = $nagios::params::nagios_conf_dir
   $apache_group = $nagios::params::apache_group
   $apache_conf = "${apache_conf_dir}/${service}.conf"
+  $nagios_cfg_file = $nagios::params::nagios_cfg_file
 
   include epel
   require ::apache
@@ -96,7 +97,25 @@ class nagios(
 
   if $collect {
     File <<| tag == $monitor_tag |>>
+
+    # collects to /etc/nagios/nagios_host.cfg, set by the type and provider
     Nagios_host <<||>>
+
+    # collects to /etc/nagios/nagios_service.cfg, set by the type and provider
     Nagios_service <<||>>
+
+    # Tell nagios about the above settings
+    file_line { "puppet_nagios_host":
+      path   => $nagios_cfg_file,
+      ensure => present,
+      line   => 'cfg_file="/etc/nagios/nagios_host.cfg"'
+    }
+
+    file_line { "puppet_nagios_service":
+      path   => $nagios_cfg_file,
+      ensure => present,
+      line   => 'cfg_file="/etc/nagios/nagios_service.cfg"'
+    }
+
   }
 }
