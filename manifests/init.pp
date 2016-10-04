@@ -126,6 +126,7 @@ class nagios(
       owner  => 'root',
       group  => $nagios_group,
       mode   => '0640',
+      notify => Service[$service],
     }
   }
 }
