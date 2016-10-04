@@ -12,4 +12,4 @@
 class { "apache":
   mpm_module => "prefork",
 }
-include ::nagios
+include ::nagios::server
