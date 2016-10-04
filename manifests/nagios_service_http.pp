@@ -18,7 +18,7 @@ define nagios::nagios_service_http(
     $_local_ip = $fqdn
   }
 
-  @@nagios_service { "${::fqdn}_http_${service_name}":
+  @@nagios_service { "${::fqdn}_http_${site_name}":
     ensure              => present,
     use                 => 'generic-service',
     host_name           => $::fqdn,
