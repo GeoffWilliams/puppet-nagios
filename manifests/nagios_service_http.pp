@@ -7,14 +7,8 @@ define nagios::nagios_service_http(
 ) {
 
   if $local_ip {
-    if $nagios_server {
-
-      # effective on the SECOND puppet run after above resource processed...
-      $local_ip = $source_ipaddress[$nagios_server]
-    } else {
-      $local_ip = $fqdn
-    }
-  } else {
+    $_local_ip = $local_ip
+  } else { 
     $_local_ip = $fqdn
   }
 
