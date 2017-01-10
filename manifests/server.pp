@@ -42,7 +42,6 @@ class nagios::server(
     $realm            = "/nagios",
     $service          = $nagios::service,
     $port             = $nagios::params::port,
-    $enable_firewall  = true,
     $purge            = true,
 ) inherits nagios::params {
   if ! defined(Class['nagios']) {
@@ -57,8 +56,6 @@ class nagios::server(
   $nagios_group     = $nagios::params::nagios_group
 
   include epel
-  require ::apache
-  require ::apache::mod::php
 
   if $purge {
     resources{ 'nagios_service': 
@@ -143,14 +140,6 @@ class nagios::server(
       group  => $nagios_group,
       mode   => '0640',
       notify => Service[$service],
-    }
-  }
-
-  if $enable_firewall and !defined(Firewall["100 ${::fqdn} HTTP ${port}"]) {
-    firewall { "100 ${::fqdn} HTTP ${port}":
-      dport   => $port,
-      proto   => 'tcp',
-      action  => 'accept',
     }
   }
 
