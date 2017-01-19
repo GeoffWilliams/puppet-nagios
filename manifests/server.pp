@@ -9,7 +9,7 @@
 # Document parameters here.
 #
 # * `collect`
-# True if should collect and realize all nagios resources and tagged 
+# True if should collect and realize all nagios resources and tagged
 # configuration files
 # * `monitor_tag`
 # Plaintext tag for nagios configuration files we should collect
@@ -21,7 +21,7 @@
 # Password for the nagios user
 # * `realm`
 # Directory to manage passwords for (`/nagios`)
-# 
+#
 # Authors
 # -------
 #
@@ -58,11 +58,11 @@ class nagios::server(
   include epel
 
   if $purge {
-    resources{ 'nagios_service': 
-      purge => true 
+    resources{ 'nagios_service':
+      purge => true
     }
-    resources{ 'nagios_host': 
-      purge => true 
+    resources{ 'nagios_host':
+      purge => true
     }
   }
 
@@ -85,6 +85,7 @@ class nagios::server(
     realm     => $realm,
     mechanism => 'basic',
     ensure    => present,
+    require => Package[$packages],
   }
 
   file { $htpasswd:
@@ -92,6 +93,7 @@ class nagios::server(
     owner  => 'root',
     group  => $apache_group,
     mode   => '0640',
+    require => Package[$packages],
   }
 
   file { $apache_conf:
@@ -114,32 +116,41 @@ class nagios::server(
 
     # collects to /etc/nagios/nagios_host.cfg, set by the type and provider
     Nagios_host <<||>>
+    Nagios_host <||> {
+      require => Package[$packages],
+    }
 
     # collects to /etc/nagios/nagios_service.cfg, set by the type and provider
     Nagios_service <<||>>
+    Nagios_service <||> {
+      require => Package[$packages],
+    }
 
     # Tell nagios about the above settings
     file_line { "puppet_nagios_host":
-      path   => $nagios_cfg_file,
-      ensure => present,
-      line   => 'cfg_file=nagios_host.cfg',
-      notify => Service[$service],
+      path    => $nagios_cfg_file,
+      ensure  => present,
+      line    => 'cfg_file=nagios_host.cfg',
+      notify  => Service[$service],
+      require => Package[$packages],
     }
 
     file_line { "puppet_nagios_service":
-      path   => $nagios_cfg_file,
-      ensure => present,
-      line   => 'cfg_file=nagios_service.cfg',
-      notify => Service[$service],
+      path    => $nagios_cfg_file,
+      ensure  => present,
+      line    => 'cfg_file=nagios_service.cfg',
+      notify  => Service[$service],
+      require => Package[$packages],
     }
 
     # fix permissions on puppet-generated cfg files
     file { ['/etc/nagios/nagios_host.cfg', '/etc/nagios/nagios_service.cfg']:
-      ensure => file,
-      owner  => 'root',
-      group  => $nagios_group,
-      mode   => '0640',
-      notify => Service[$service],
+      ensure  => file,
+      owner   => 'root',
+      group   => $nagios_group,
+      mode    => '0640',
+      notify  => Service[$service],
+      require => Package[$packages],
     }
   }
 
