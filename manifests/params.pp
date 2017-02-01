@@ -1,3 +1,6 @@
+# Nagios::Params
+#
+# Params pattern for nagios module
 class nagios::params {
   case $osfamily {
     'RedHat': {
@@ -8,7 +11,7 @@ class nagios::params {
       $nagios_group = 'nagios'
     }
     'Debian': {
-      # https://tickets.puppetlabs.com/browse/MODULES-3116      
+      # https://tickets.puppetlabs.com/browse/MODULES-3116
       # $apache_conf_dir = '/etc/apache2/conf-available/'
       $apache_conf_dir = '/etc/apache2/conf.d'
       $service = 'nagios3'

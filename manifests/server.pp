@@ -1,12 +1,6 @@
-# Class: nagios
-# ===========================
+# Nagios::Server
 #
-# Full description of class nagios here.
-#
-# Parameters
-# ----------
-#
-# Document parameters here.
+# Install a nagios server
 #
 # * `collect`
 # True if should collect and realize all nagios resources and tagged
@@ -80,19 +74,19 @@ class nagios::server(
   }
 
   httpauth { 'nagiosadmin':
+    ensure    => present,
     file      => $htpasswd,
     password  => $password,
     realm     => $realm,
     mechanism => 'basic',
-    ensure    => present,
-    require => Package[$packages],
+    require   => Package[$packages],
   }
 
   file { $htpasswd:
-    ensure => file,
-    owner  => 'root',
-    group  => $apache_group,
-    mode   => '0640',
+    ensure  => file,
+    owner   => 'root',
+    group   => $apache_group,
+    mode    => '0640',
     require => Package[$packages],
   }
 
@@ -128,16 +122,16 @@ class nagios::server(
 
     # Tell nagios about the above settings
     file_line { "puppet_nagios_host":
-      path    => $nagios_cfg_file,
       ensure  => present,
+      path    => $nagios_cfg_file,
       line    => 'cfg_file=nagios_host.cfg',
       notify  => Service[$service],
       require => Package[$packages],
     }
 
     file_line { "puppet_nagios_service":
-      path    => $nagios_cfg_file,
       ensure  => present,
+      path    => $nagios_cfg_file,
       line    => 'cfg_file=nagios_service.cfg',
       notify  => Service[$service],
       require => Package[$packages],

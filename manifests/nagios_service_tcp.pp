@@ -1,3 +1,6 @@
+# Nagios::Nagios_service_tcp
+#
+# Nagios TCP service monitoring
 define nagios::nagios_service_tcp(
     $local_ip       = $nagios::local_ip,
     $site_name      = $title,
@@ -7,7 +10,7 @@ define nagios::nagios_service_tcp(
 
   if $local_ip {
     $_local_ip = $local_ip
-  } else { 
+  } else {
     $_local_ip = $fqdn
   }
 

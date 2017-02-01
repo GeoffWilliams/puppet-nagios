@@ -1,3 +1,6 @@
+# Nagios::Nagios_service_http
+#
+# Nagios HTTP service monitoring
 define nagios::nagios_service_http(
     $local_ip       = $nagios::local_ip,
     $site_name      = $title,
@@ -8,7 +11,7 @@ define nagios::nagios_service_http(
 
   if $local_ip {
     $_local_ip = $local_ip
-  } else { 
+  } else {
     $_local_ip = $fqdn
   }
 
