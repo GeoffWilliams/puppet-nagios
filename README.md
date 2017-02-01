@@ -63,22 +63,17 @@ RHEL/centos only for the moment
 PRs accepted
 
 ## Testing
-This module ships with RSpec tests.  To run them, first prepare your system:
-```shell
+This module supports testing using [PDQTest](https://github.com/GeoffWilliams/pdqtest).
+
+Test can be executed with:
+
+```
 bundle install
+bundle exec pdqtest all
 ```
 
-You may then run the tests at will.  If downloading from GitHub from behind a
-proxy server, you will need to have your `http_proxy` and `https_proxy`
-variables exported
-```shell
-bundle exec rake spec
-```
 
-It is suggested to have your CI server execute these tests before allowing code
-to be published to the puppet master.  
-
-**DO NOT ATTEMPT TO RUN RSPEC TESTS ON THE PUPPET MASTER!**
+See `.travis.yml` for a working CI example
 
 ## Contributors
 

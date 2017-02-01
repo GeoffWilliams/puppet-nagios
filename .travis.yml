@@ -1,7 +1,14 @@
 ---
-sudo: required
+sudo: false
 language: ruby
-bundler_args: --without development
-script: "bundle install && bundle exec rake spec"
-notifications:
-  email: false
+services:
+  - docker
+cache: bundler
+before_install:
+  - gem update bundler
+script: "bundle exec pdqtest setup && bundle exec pdqtest all"
+rvm:
+  - 2.2.2
+env:
+  matrix:
+  - PUPPET_GEM_VERSION="~> 4.7.0"
