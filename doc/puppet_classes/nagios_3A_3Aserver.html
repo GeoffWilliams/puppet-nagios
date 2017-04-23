@@ -199,7 +199,7 @@ to</p>
         <span class='type'>(<tt>Any</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$nagios::service</tt>)</em>
+        <em class="default">(defaults to: <tt>$nagios::params::service</tt>)</em>
       
       
     </li>
@@ -373,7 +373,7 @@ class nagios::server(
     $htpasswd         = $nagios::params::htpasswd,
     $password         = &quot;changeme&quot;,
     $realm            = &quot;/nagios&quot;,
-    $service          = $nagios::service,
+    $service          = $nagios::params::service,
     $port             = $nagios::params::port,
     $purge            = true,
 ) inherits nagios::params {

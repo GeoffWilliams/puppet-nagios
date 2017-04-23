@@ -34,7 +34,7 @@ class nagios::server(
     $htpasswd         = $nagios::params::htpasswd,
     $password         = "changeme",
     $realm            = "/nagios",
-    $service          = $nagios::service,
+    $service          = $nagios::params::service,
     $port             = $nagios::params::port,
     $purge            = true,
 ) inherits nagios::params {
