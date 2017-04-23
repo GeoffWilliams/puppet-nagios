@@ -11,8 +11,7 @@
     {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
     {"name":"stahnma-epel","version_requirement":">= 1.0.0"},
     {"name":"puppetlabs-apache","version_requirements":">= 1.0.0"},
-    {"name":"jamtur01-httpauth", "version_requirement":"0.0.3"},
-    {"name":"puppetlabs-apache", "version_requirement":"1.11.0"}
+    {"name":"jamtur01-httpauth", "version_requirement":"0.0.3"}
   ],
   "data_provider": null
 }
