@@ -1,42 +1,38 @@
-# Nagios::Server
+# @summary Install a nagios server
 #
-# Install a nagios server
-#
-# * `collect`
-# True if should collect and realize all nagios resources and tagged
-# configuration files
-# * `monitor_tag`
-# Plaintext tag for nagios configuration files we should collect
-# * `apache_conf_dir`
-# Directory to write apache configuration files to
-# * `htpasswd`
-# Full path to .htpasswd file
-# * `password`
-# Password for the nagios user
-# * `realm`
-# Directory to manage passwords for (`/nagios`)
-#
-# Authors
-# -------
-#
+# **Authors**
 # Brett Gray
 # Geoff Williams
 #
-# Copyright
-# ---------
-#
+# **Copyright**
 # Copyright 2016 Puppet, Inc.
 #
+# @param collect
+#   True if should collect and realize all nagios resources and tagged
+#   configuration files
+# @param monitor_tag
+#   Plaintext tag for nagios configuration files we should collect
+# @param apache_conf_dir
+#   Directory to write apache configuration files to
+# @param htpasswd
+#   Full path to .htpasswd file
+# @param password
+#   Password for the nagios user
+# @param realm
+#   Directory to manage passwords for (`/nagios`)
+# @param service
+#   Nagios service name
+# @param purge
+#   Purge unmanaged `nagios_service`, `nagios_host` resources
 class nagios::server(
-    $collect          = true,
-    $monitor_tag      = "__MONITOR__",
-    $apache_conf_dir  = $nagios::params::apache_conf_dir,
-    $htpasswd         = $nagios::params::htpasswd,
-    $password         = "changeme",
-    $realm            = "/nagios",
-    $service          = $nagios::params::service,
-    $port             = $nagios::params::port,
-    $purge            = true,
+    Boolean $collect          = true,
+    String  $monitor_tag      = "__MONITOR__",
+    String  $apache_conf_dir  = $nagios::params::apache_conf_dir,
+    String  $htpasswd         = $nagios::params::htpasswd,
+    String  $password         = "changeme",
+    String  $realm            = "/nagios",
+    String  $service          = $nagios::params::service,
+    Boolean $purge            = true,
 ) inherits nagios::params {
   if ! defined(Class['nagios']) {
     fail('You must include the nagios base class before using the nagios::server class')

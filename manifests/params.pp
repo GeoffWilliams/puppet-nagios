@@ -1,6 +1,4 @@
-# Nagios::Params
-#
-# Params pattern for nagios module
+# @summary Params pattern for nagios module
 class nagios::params {
   case $osfamily {
     'RedHat': {

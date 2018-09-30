@@ -1,5 +1,5 @@
 {
-  "name": "geoffwilliams/nagios",
+  "name": "geoffwilliams-nagios",
   "version": "0.1.1",
   "author": "geoffwilliams",
   "summary": "Nagios Server installation",
@@ -8,11 +8,29 @@
   "project_page": "https://github.com/GeoffWilliams/puppet-nagios",
   "issues_url": "https://github.com/GeoffWilliams/puppet-nagios/issues",
   "dependencies": [
-    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
-    {"name":"stahnma-epel","version_requirement":">= 1.0.0"},
-    {"name":"puppetlabs-apache","version_requirements":">= 1.0.0"},
-    {"name":"jamtur01-httpauth", "version_requirement":"0.0.3"}
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": "5.0.0"
+    },
+    {
+      "name": "stahnma-epel",
+      "version_requirement": "1.3.1"
+    },
+    {
+      "name": "puppetlabs-apache",
+      "version_requirement": "3.4.0"
+    },
+    {
+      "name": "jamtur01-httpauth",
+      "version_requirement": "0.0.3"
+    },
+    {
+      "name": "puppetlabs-concat",
+      "version_requirement": "5.0.0"
+    }
   ],
-  "data_provider": null
+  "data_provider": null,
+  "pdk-version": "1.7.0",
+  "template-url": "file:///opt/puppetlabs/pdk/share/cache/pdk-templates.git",
+  "template-ref": "1.7.0-0-g57412ed"
 }
-

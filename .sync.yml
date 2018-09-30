@@ -1,0 +1,13 @@
+---
+".travis.yml":
+  unmanaged: true
+".gitignore":
+  paths:
+  - ".Puppetfile.pdqtest"
+".gitattributes":
+  include:
+  - "*.epp eol=lf"
+  - "*.json eol=lf"
+  - "*.yaml eol=lf"
+  - "*.yml eol=lf"
+  - "*.md eol=lf"
